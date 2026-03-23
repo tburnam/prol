@@ -1,19 +1,16 @@
-# Quant Team
+# prol
 
-A self-improving AI quantitative trading firm powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) and [OpenAI Codex CLI](https://github.com/openai/codex). The system researches markets, develops strategies, executes trades, builds its own team, and improves itself over time.
+Self-improving quantitative trading agent to escape the permanent underclass.
 
-Built on [MCP](https://modelcontextprotocol.io/) servers for market data, web research, and trade execution across stocks, options, and crypto.
+![Architecture](architecture.png)
 
-## Philosophy
-
-A lightweight harness that uses skills and mcps to give Claude Code and Codex CLI full autonomy to operate a quantitative trading firm. They perform research, develop strategies, refine theses, improve their tools/skills, extend/modify the team, and execute trades.
+A lightweight harness that gives [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) and [Codex CLI](https://github.com/openai/codex) full autonomy to operate a quantitative trading firm. Skills, [MCP](https://modelcontextprotocol.io/) servers, and a self-modifying team of AI agents research markets, develop strategies, refine theses, execute trades, and improve their own tools.
 
 ## Prerequisites
 
 - **macOS** (sandbox scripts use `sandbox-exec`)
-- **Node.js 18+**
 - **Python 3.12+** with [`uv`](https://docs.astral.sh/uv/)
-- [**Claude Code**](https://docs.anthropic.com/en/docs/claude-code/overview) -- `npm install -g @anthropic-ai/claude-code`
+- [**Claude Code**](https://docs.anthropic.com/en/docs/claude-code/overview) -- `curl -fsSL https://claude.ai/install.sh | bash`
 - [**OpenAI Codex CLI**](https://github.com/openai/codex) -- `npm install -g @openai/codex` *(optional)*
 
 ## Setup
