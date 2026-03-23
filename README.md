@@ -6,16 +6,7 @@ Built on [MCP](https://modelcontextprotocol.io/) servers for market data, web re
 
 ## Philosophy
 
-You're not configuring a bot. You're seeding a system that discovers its own strategies, builds its own tools, and grows its own team.
-
-**Core laws:**
-- Everything compounds -- trades, failures, knowledge
-- Hypotheses require evidence -- backtest or it didn't happen
-- Every edge decays -- adapt or die
-- Simplicity wins -- complexity must be earned
-- The system owns its evolution
-- Never idle -- always produce value
-- Challenge everything -- disprove your own theses
+A lightweight harness that uses skills and mcps to give Claude Code and Codex CLI full autonomy to operate a quantitative trading firm. They perform research, develop strategies, refine theses, improve their tools/skills, extend/modify the team, and execute trades.
 
 ## Prerequisites
 
@@ -36,22 +27,18 @@ cp .env.example .env
 
 ### 2. Add your API keys
 
-**`.env`** -- Trading credentials ([Alpaca](https://alpaca.markets/)):
+All keys go in **`.env`** -- the MCP config is generated automatically on launch.
+
 ```bash
-ALPACA_API_KEY=your_key
+ALPACA_API_KEY=your_key              # https://alpaca.markets/
 ALPACA_SECRET_KEY=your_secret
 ALPACA_BASE_URL=https://paper-api.alpaca.markets
+ALPHA_VANTAGE_API_KEY=your_key       # https://www.alphavantage.co/support/#api-key
+EXA_API_KEY=your_key                 # https://exa.ai/
+FIRECRAWL_API_KEY=your_key           # https://firecrawl.dev/
 ```
 
-**`.mcp.json`** -- Replace the placeholder keys:
-- **Exa** -- replace `<exa_api_key>` in the URL ([get a key](https://exa.ai/))
-- **Firecrawl** -- replace `<firecrawl_api_key>` in the Authorization header ([get a key](https://firecrawl.dev/))
-
-**For Codex CLI** -- set environment variables referenced in `.codex/config.toml`:
-```bash
-export EXA_API_KEY=your_exa_key
-export FIRECRAWL_API_KEY=your_firecrawl_key
-```
+Missing keys? The launcher warns you on startup. Run `/setup` inside Claude to configure them interactively.
 
 ### 3. Launch
 
@@ -133,6 +120,7 @@ Team members are deployed each session via `TeamCreate`. The roster evolves -- n
 | [Alpaca](https://alpaca.markets/) | Local (stdio) | Stocks, options, crypto -- market data, execution, portfolio management |
 | [Exa](https://exa.ai/) | Remote (HTTP) | Web search, research, news, prediction markets, social sentiment |
 | [Firecrawl](https://firecrawl.dev/) | Remote (HTTP) | Deep URL scraping -- SEC filings, earnings transcripts, reports |
+| [Alpha Vantage](https://www.alphavantage.co/) | Remote (HTTP) | Technical indicators, fundamentals, earnings, options chains, news/sentiment |
 | [Codex](https://github.com/openai/codex) | Local (stdio) | Delegate coding tasks to a parallel agent |
 
 ## Sandbox
@@ -162,7 +150,8 @@ Immutable invariants that cannot be weakened by self-modification:
 quant-team/
 ├── CLAUDE.md                 # Claude Code system prompt
 ├── AGENTS.md                 # Codex CLI system prompt
-├── .mcp.json                 # MCP server config (add your API keys)
+├── .mcp.json                 # MCP server config (generated -- gitignored)
+├── .mcp.json.template        # MCP config template (committed)
 ├── run.sh                    # Launch script
 ├── skills/                   # Skill definitions (SKILL.md each)
 │   ├── init/                 #   One-time bootstrap
@@ -178,6 +167,7 @@ quant-team/
 │   ├── safe-codex.sh         #   Codex CLI sandbox wrapper
 │   ├── alpaca-mcp.sh         #   Alpaca MCP server launcher
 │   ├── alpaca.sh             #   Alpaca REST API helper
+│   ├── generate-mcp-config.sh #  Generate .mcp.json from template + .env
 │   └── start.sh              #   Convenience launcher
 ├── .claude/                  # Claude Code settings + skill symlinks
 ├── .agents/                  # Codex CLI skill symlinks
@@ -185,18 +175,6 @@ quant-team/
 ├── .env.example              # API key template
 └── state/                    # Persistent state (gitignored, created by /init)
 ```
-
-## Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `CLAUDE_MODEL` | `sonnet` | Model for Claude Code |
-| `ALPACA_API_KEY` | -- | Alpaca API key |
-| `ALPACA_SECRET_KEY` | -- | Alpaca secret key |
-| `ALPACA_BASE_URL` | -- | Alpaca API URL (`https://paper-api.alpaca.markets`) |
-| `EXA_API_KEY` | -- | Exa API key (Codex config) |
-| `FIRECRAWL_API_KEY` | -- | Firecrawl API key (Codex config) |
-| `SANDBOX_ALLOW_READ` | *(empty)* | Extra read-only paths for sandbox |
 
 ## License
 

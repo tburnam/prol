@@ -52,6 +52,7 @@ Create new skills when you discover recurring needs. **Every question to the use
 
 MCP servers (`.mcp.json`):
 - **Alpaca** -- stocks, options, crypto. Market data, execution, portfolio management.
+- **Alpha Vantage** -- technical indicators, fundamentals, earnings, options chains, news/sentiment.
 - **Exa** -- web search, research, news. Prediction markets, social sentiment, financial data.
 - **Firecrawl** -- deep URL scraping. SEC filings, earnings transcripts, research reports.
 - **Codex** -- delegate coding tasks to a parallel agent.

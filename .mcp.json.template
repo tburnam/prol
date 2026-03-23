@@ -6,18 +6,18 @@
         },
         "exa": {
             "type": "http",
-            "url": "https://mcp.exa.ai/mcp?exaApiKey="
+            "url": "https://mcp.exa.ai/mcp?exaApiKey=${EXA_API_KEY}"
         },
         "firecrawl": {
             "type": "http",
             "url": "https://mcp.firecrawl.dev/v2/mcp",
             "headers": {
-                "Authorization": "Bearer "
+                "Authorization": "Bearer ${FIRECRAWL_API_KEY}"
             }
         },
         "alphavantage": {
             "type": "http",
-            "url": "https://mcp.alphavantage.co/mcp?apikey=8UCETNMJSIPQIYT4"
+            "url": "https://mcp.alphavantage.co/mcp?apikey=${ALPHA_VANTAGE_API_KEY}"
         },
         "codex": {
             "type": "stdio",

@@ -14,6 +14,31 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 AGENT="${1:-claude}"
 shift 2>/dev/null || true
 
+# --- Generate .mcp.json from template + .env ---
+if [[ ! -f "$SCRIPT_DIR/.env" ]]; then
+    echo "⚠  No .env file found. Copy .env.example → .env and fill in your API keys."
+    echo "   Run /setup inside Claude to get help configuring them."
+    exit 1
+fi
+
+"$SCRIPT_DIR/scripts/generate-mcp-config.sh"
+
+# Warn about missing API keys
+MISSING=()
+while IFS='=' read -r key value; do
+    [[ -z "$key" || "$key" =~ ^# ]] && continue
+    [[ -z "$value" ]] && MISSING+=("$key")
+done < "$SCRIPT_DIR/.env"
+
+if [[ ${#MISSING[@]} -gt 0 ]]; then
+    echo "⚠  Missing API keys in .env:"
+    for k in "${MISSING[@]}"; do
+        echo "   - $k"
+    done
+    echo "   Run /setup inside Claude to configure them."
+    echo ""
+fi
+
 # Telegram is on by default; --no-telegram disables it
 TELEGRAM=true
 PASSTHROUGH=()

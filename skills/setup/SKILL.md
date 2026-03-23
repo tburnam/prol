@@ -10,7 +10,9 @@ Interactive guided setup. For each server: **diagnose → fix → verify**. Use 
 for every input needed from the user. Do file edits yourself — never ask the user to edit
 config files manually.
 
-Args: `/setup [target]` — alpaca, exa, firecrawl, codex, telegram, or omit for all.
+Args: `/setup [target]` — alpaca, exa, firecrawl, alphavantage, codex, telegram, or omit for all.
+
+**Key management**: All API keys live in `.env`. After writing a key, run `scripts/generate-mcp-config.sh` to regenerate `.mcp.json` from the template.
 
 ## Procedure
 
@@ -33,7 +35,7 @@ Don't move to the next server until the current one works or user explicitly ski
 **Diagnose**: Call `web_search_exa` with any query.
 **Fix if broken**:
 1. AskUserQuestion: "Exa needs an API key. Go to https://exa.ai → sign up → Dashboard → API Keys. Paste your key here."
-2. Edit `.mcp.json`: replace the `exaApiKey=` value in the exa server URL.
+2. Write key to `.env` (`EXA_API_KEY=<key>`), then run `scripts/generate-mcp-config.sh`.
 **Verify**: Call `web_search_exa` again.
 
 ### Firecrawl
@@ -41,8 +43,16 @@ Don't move to the next server until the current one works or user explicitly ski
 **Diagnose**: Call `firecrawl_scrape` on `https://example.com`.
 **Fix if broken**:
 1. AskUserQuestion: "Firecrawl needs an API key. Go to https://www.firecrawl.dev → sign up → Dashboard → API Keys. Paste your key here."
-2. Edit `.mcp.json`: replace the `Bearer <key>` value in the firecrawl Authorization header.
+2. Write key to `.env` (`FIRECRAWL_API_KEY=<key>`), then run `scripts/generate-mcp-config.sh`.
 **Verify**: Call `firecrawl_scrape` again.
+
+### Alpha Vantage
+
+**Diagnose**: Check `.env` for `ALPHA_VANTAGE_API_KEY`.
+**Fix if broken**:
+1. AskUserQuestion: "Alpha Vantage needs an API key. Go to https://www.alphavantage.co/support/#api-key → get a free key. Paste it here."
+2. Write key to `.env` (`ALPHA_VANTAGE_API_KEY=<key>`), then run `scripts/generate-mcp-config.sh`.
+**Verify**: Call an Alpha Vantage MCP tool.
 
 ### Codex
 
