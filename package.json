@@ -1,0 +1,7 @@
+{
+  "name": "quant-team",
+  "scripts": {
+    "init": "./run.sh claude '/init'",
+    "start": "./scripts/start.sh"
+  }
+}

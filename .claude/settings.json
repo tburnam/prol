@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./scripts/alpaca.sh *)",
+      "mcp__plugin_telegram_telegram__reply",
+      "mcp__plugin_telegram_telegram__react",
+      "mcp__plugin_telegram_telegram__edit_message",
+      "mcp__plugin_telegram_telegram__download_attachment"
+    ]
+  },
+  "enabledPlugins": {
+    "telegram@claude-plugins-official": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+    "mcpServers": {
+        "alpaca": {
+            "type": "stdio",
+            "command": "./scripts/alpaca-mcp.sh"
+        },
+        "exa": {
+            "type": "http",
+            "url": "https://mcp.exa.ai/mcp?exaApiKey=<exa_api_key>"
+        },
+        "firecrawl": {
+            "type": "http",
+            "url": "https://mcp.firecrawl.dev/v2/mcp",
+            "headers": {
+                "Authorization": "Bearer <firecrawl_api_key>"
+            }
+        },
+        "codex": {
+            "type": "stdio",
+            "command": "codex",
+            "args": ["mcp-server"]
+        }
+    }
+}
+
